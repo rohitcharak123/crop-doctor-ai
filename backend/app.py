@@ -14,13 +14,13 @@ MODEL_PATH = "crop_doctor_model.keras"
 try:
     if os.path.exists(MODEL_PATH):
         model = tf.keras.models.load_model(MODEL_PATH)
-        print("✅ Custom AI Model loaded successfully!")
+        print("Custom AI Model loaded successfully!")
     else:
         model = None
-        print(f"⚠️ Model '{MODEL_PATH}' not found. Please run train.py first!")
+        print(f"Model '{MODEL_PATH}' not found. Please run train.py first!")
 except Exception as e:
     model = None
-    print(f"❌ Error loading model: {e}")
+    print(f"Error loading model: {e}")
 
 import json
 
@@ -30,11 +30,11 @@ try:
     if os.path.exists("class_names.json"):
         with open("class_names.json", "r") as f:
             CLASS_NAMES = json.load(f)
-            print(f"✅ Loaded {len(CLASS_NAMES)} custom classes for prediction.")
+            print(f"Loaded {len(CLASS_NAMES)} custom classes for prediction.")
     else:
-        print("⚠️ class_names.json not found! Run train.py first so the server knows what classes exist.")
+        print("class_names.json not found! Run train.py first so the server knows what classes exist.")
 except Exception as e:
-    print(f"❌ Error loading class_names.json: {e}")
+    print(f"Error loading class_names.json: {e}")
 
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
